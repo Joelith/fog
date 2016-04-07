@@ -8,6 +8,7 @@ module Fog
     service(:storage, 'Storage')
     service(:java, 'Java')
     service(:soa, 'SOA')
+    service(:compute, 'Compute')
 
 
     class Mock
@@ -16,7 +17,6 @@ module Fog
           {
             "service_name"      => service_name,
             "status" 						=> "Running",
-            "content_url" 			=> "http://129.144.6.59",
             "version"						=> parameters[0][:version]
            }
         end

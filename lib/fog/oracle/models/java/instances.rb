@@ -13,9 +13,9 @@ module Fog
           load(data)
         end
 
-        def get(id)
+        def get(service_name)
         	begin
-            new(service.get_instance(id).body)
+            new(service.get_instance(service_name).body)
           rescue Fog::Oracle::Java::NotFound
             nil
           end

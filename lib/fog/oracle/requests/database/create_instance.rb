@@ -16,9 +16,7 @@ module Fog
             'parameters'              => parameters
           }
           body_data = body_data.reject {|key, value| value.nil?}
-          print "\n\n"
-          print Fog::JSON.encode(body_data)
-          print "\n\n"
+        
           request(
             :method   => 'POST',
             :expects  => 202,

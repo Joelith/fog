@@ -31,6 +31,11 @@ module Fog
         attribute :subscriptionType
         attribute :parameters
 
+        # The following are used to delete an instance and are not returned in the list action
+        attribute :dba_name
+        attribute :dba_password
+        attribute :force_delete
+
         def save
           #identity ? update : create
           create
@@ -40,10 +45,13 @@ module Fog
           status == "Running"
         end
 
-        def ip_address
-        	# TODO: Replace with regex
-
-        	content_url != nil ? content_url.sub('http://', '') : ''
+        def servers
+          service.servers.all(service_name)
+        end
+				
+				def destroy
+          requires :service_name, :dba_name, :dba_password
+          service.delete_instance(service_name, dba_name, dba_password, :force_delete => force_delete).body
         end
 
         private
@@ -58,9 +66,6 @@ module Fog
 
         end
 
-        def update
-
-        end
       end
     end
   end

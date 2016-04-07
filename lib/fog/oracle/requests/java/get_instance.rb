@@ -3,11 +3,11 @@ module Fog
     class Java
       class Real
 
-      	def get_instance(instance_id)
+      	def get_instance(service_name)
  					response = request(
             :expects  => 200,
             :method   => 'GET',
-            :path     => "/paas/service/jcs/api/v1.1/instances/#{@identity_domain}/#{instance_id}"
+            :path     => "/paas/service/jcs/api/v1.1/instances/#{@identity_domain}/#{service_name}"
           )
           response
         end
