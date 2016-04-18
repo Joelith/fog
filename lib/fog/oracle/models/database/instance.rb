@@ -60,6 +60,11 @@ module Fog
             content_url.sub('http://', '')
         end
 
+        def destroy
+          requires :service_name
+          service.delete_instance(service_name).body
+        end
+
         private
 
         def create

@@ -13,6 +13,7 @@ module Fog
       request :list_instances
       request :create_instance
       request :get_instance
+      request :delete_instance
 
       class Real
 

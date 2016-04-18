@@ -28,6 +28,12 @@ module Fog
         attribute :topology
         attribute :parameters
 
+        # The following are used to delete an instance and are not returned in the list action
+        attribute :dba_name
+        attribute :dba_password
+        attribute :force_delete
+        attribute :skip_backup
+
         def save
           #identity ? update : create
           create
@@ -37,10 +43,11 @@ module Fog
           status == "Running"
         end
 
-
-        def ip_address
-          # TODO: Replace with regex
-          #service_uri.sub('http://', '')
+        def destroy
+          requires :service_name, :dba_name, :dba_password
+          service.delete_instance(service_name, dba_name, dba_password, 
+                                            :force_delete => force_delete,
+                                            :skip_backup => skip_backup).body
         end
 
         private

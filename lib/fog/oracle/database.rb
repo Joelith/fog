@@ -13,6 +13,7 @@ module Fog
       request :list_instances
       request :get_instance
       request :create_instance
+      request :delete_instance
 
       class Real
 
@@ -41,7 +42,7 @@ module Fog
           rescue Excon::Errors::HTTPStatusError => error
             raise case error
             when Excon::Errors::NotFound
-              Fog::Oracle::Java::NotFound.slurp(error)
+              Fog::Oracle::Database::NotFound.slurp(error)
             else
               error
             end
